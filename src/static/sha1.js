@@ -8,7 +8,7 @@
  * @license MIT
  */
 /*jslint bitwise: true */
-(function () {
+export default function () {
     'use strict';
 
     var root = typeof window === 'object' ? window : {};
@@ -369,4 +369,4 @@
             });
         }
     }
-})();
+}

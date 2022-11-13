@@ -25,23 +25,14 @@ export default {
     },
     onclick_clearHistory() {
       uni.showModal({
-        title: '确认清空答题历史?',
-        content: '清空后无法恢复',
+        title: '确认清空答题历史?', content: '清空后无法恢复',
         success: function (res) {
           if (res.confirm) {
             uni.clearStorage()
             uni.setStorageSync('answers', '[]')
-            uni.showToast({
-              title: '清空成功',
-              icon: 'success',
-              duration: 2000
-            })
+            uni.showToast({ title: '清空成功', icon: 'success', duration: 2000 })
           } else if (res.cancel) {
-            uni.showToast({
-              title: '取消清空',
-              icon: 'none',
-              duration: 2000
-            })
+            uni.showToast({ title: '取消清空', icon: 'none', duration: 2000 })
           }
         }
       });

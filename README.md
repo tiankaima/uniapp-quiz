@@ -17,9 +17,10 @@ Checkout `uniapp` documents.
 ## One more thing
 
 I haven't really code much this year, so when someone came up with this opportunity to write a miniprogram, I took the job with much delight.
+
 Previously I've been using Wechat's "native" framework to write theses, but I'd also never use `Vue` before, so I decided to take `uniapp` as a beginning.
 
-Turns out, the amount of work required is actually much less than I would expect, with plenty document(both Eng and Chn), and less bug and nonintuitive behaviors to overcome.
+Turns out, the amount of work required is actually much less than I would expect, with plenty document(both Eng and Chn), less bug and nonintuitive behaviors to overcome.
 
 To be fair, I'm still personlly in favor of more "native" way to code, most of my App codes are written in `swift` or `rust`, they provide far more security and performance benifits over `js` and `ts`, but this experience with `uniapp` really does change my view on web-tech.
 

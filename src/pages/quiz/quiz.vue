@@ -2,7 +2,6 @@
     <view class="content">
         <progress class="progress-box" :percent="progress" activeColor="#10AEFF" stroke-width="3" show-info></progress>
         <uni-title class="title" type="h2" :title="question"></uni-title>
-        <!-- <text class="title">{{ question }}</text> -->
         <form @submit="sumbit_form" class="form-block">
             <view class="options-block">
                 <view v-if="type == 0 && !checked">
@@ -138,29 +137,21 @@ export default {
             // check if the current question is the first one
             if (_question.id == question_list[0].id) {
                 // navigate back to home page:
-                uni.redirectTo({
-                    url: '/pages/index/index'
-                })
+                uni.redirectTo({ url: '/pages/index/index' })
                 return
             }
             let previous_question_id = question_list[question_list.findIndex(element => element.id == _question.id) - 1].id
-            uni.redirectTo({
-                url: '/pages/quiz/quiz?id=' + previous_question_id,
-            })
+            uni.redirectTo({ url: '/pages/quiz/quiz?id=' + previous_question_id })
         },
         onclick_next() {
             // check if the current question is the last one
             if (_question.id == question_list[question_list.length - 1].id) {
                 // bring user to the result page
-                uni.navigateTo({
-                    url: '/pages/result/result'
-                })
+                uni.navigateTo({ url: '/pages/result/result' })
                 return
             }
             let next_question_id = question_list[question_list.findIndex(element => element.id == _question.id) + 1].id
-            uni.redirectTo({
-                url: '/pages/quiz/quiz?id=' + next_question_id,
-            })
+            uni.redirectTo({ url: '/pages/quiz/quiz?id=' + next_question_id })
         },
         sumbit_form(e) {
             if (this.checked) {
@@ -210,35 +201,23 @@ export default {
                 // console.log('!')
             }
             // try reloading the page to ignore all refresh problems
-            uni.redirectTo({
-                url: '/pages/quiz/quiz?id=' + _question.id,
-            })
+            uni.redirectTo({ url: '/pages/quiz/quiz?id=' + _question.id })
         },
         color_option(id) {
             if (this.answers == undefined || _question.answer == undefined) {
                 // something not loaded in AppCycle, this should not be a concern since it would automatically reload the page after all data is loaded
-                return {
-                    color: '#000000'
-                }
+                return { color: '#000000' }
             }
             if (_question.answer.includes(id)) {
                 if (this.answers.includes(id)) {
-                    return {
-                        color: '#00ff00'
-                    }
+                    return { color: '#00ff00' }
                 }
-                return {
-                    color: '#9ed99d'
-                }
+                return { color: '#9ed99d' }
             }
             if (this.answers.includes(id)) {
-                return {
-                    color: '#ff0000'
-                }
+                return { color: '#ff0000' }
             }
-            return {
-                color: "#000000"
-            }
+            return { color: "#000000" }
         }
     },
 }

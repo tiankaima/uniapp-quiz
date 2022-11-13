@@ -13,7 +13,7 @@
 <script>
 import question_json from '../../static/data.json'
 // import sha1 from '../../static/sha1.js'
-const sha1 = require("../../static/sha1.js");
+import sha1 from '../../static/sha1.js'
 let question_list = JSON.parse(JSON.stringify(question_json))
 var percent = 0.0
 export default {
