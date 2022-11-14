@@ -12,7 +12,6 @@
 
 <script>
 import question_json from '../../static/data.json'
-// import sha1 from '../../static/sha1.js'
 import sha1 from '../../static/sha1.js'
 let question_list = JSON.parse(JSON.stringify(question_json))
 var percent = 0.0
@@ -24,7 +23,7 @@ export default {
     },
     onReady() {
         // Modified from https://github.com/viveketic/gavatar, Apache 2.0 License
-        // Great thanks to Vivek Etić for this amazing code
+        // Great thanks to Vivek Etić for these amazing code
         function rand(x) {
             var z = (x << 13) ^ x;
             return ((1.0 - ((z * (z * z * 15731 + 789221) + 1376312589) & 0x7fffffff) / 1073741824.0) + 1.0) / 2.0;
@@ -34,10 +33,9 @@ export default {
         let avatarCanvasSize = 290; //5*50 + 2*20
         var ctx = uni.createCanvasContext('avatar')
         var hex = Math.floor(Math.random() * 16777215).toString(16);;
-        var num = Math.max(0.25, percent);
+        var num = Math.max(0.25, percent); // set with a minimum of 25% to prevet (0) => empty drawing.
         var seed = 50;
 
-        // ctx.fillStyle = "#f0f0f0";
         ctx.setFillStyle("#ffffff");
         ctx.fillRect(0, 0, avatarCanvasSize, avatarCanvasSize);
         ctx.setStrokeStyle("f0f0f0")
@@ -50,13 +48,9 @@ export default {
                 var r = rand(parseInt(seed) + x * 3 + y);
                 if (r < num) {
                     ctx.fillStyle = "#" + hex;
-                    ctx.fillRect(x * blockSize + avatarMargin,
-                        y * blockSize + avatarMargin,
-                        blockSize, blockSize);
+                    ctx.fillRect(x * blockSize + avatarMargin, y * blockSize + avatarMargin, blockSize, blockSize);
                     ctx.fillStyle = "#" + hex;
-                    ctx.fillRect((5 - 1 - x) * blockSize + avatarMargin,
-                        y * blockSize + avatarMargin,
-                        blockSize, blockSize);
+                    ctx.fillRect((5 - 1 - x) * blockSize + avatarMargin, y * blockSize + avatarMargin, blockSize, blockSize);
                 }
             }
         }
@@ -66,35 +60,22 @@ export default {
         var count = 0;
         try {
             const answers_list = JSON.parse(uni.getStorageSync('answers'))
-            // console.log(answers_list, question_list)
             for (let i = 0; i < question_list.length; i++) {
                 let answer = answers_list.find(element => element.id == question_list[i].id)
-                if (answer == undefined) {
-                    continue
-                }
-                if (answer.answers.length == 0) {
-                    continue
-                }
-                if (question_list[i].answer.sort().equals(answer.answers.sort())) {
-                    count++
-                }
+                if (answer == undefined) continue;
+                if (answer.answers.length == 0) continue;
+                if (question_list[i].answer.sort().equals(answer.answers.sort())) count++;
             }
         } catch (e) {
             console.warn(e)
             uni.setStorageSync('answers', '[]')
         }
-        // console.log(count, question_list.length)
         this.title = "您的得分为：" + count + "/" + question_list.length
-        // percent = count / question_list.length
-        percent = 0.6
+        percent = count / question_list.length
     },
     methods: {
-        calc_uuid() {
+        calc_uuid: () => {
             return sha1(uni.getSystemInfoSync().deviceId)
-            // return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            //     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            //     return v.toString(16);
-            // });
         }
     },
 }
@@ -115,10 +96,6 @@ export default {
 .canvas {
     height: 300px;
     width: 300px;
-    /* margin-top: 200rpx; */
-    /* margin-left: auto;
-    margin-right: auto; */
-    /* margin-bottom: 50rpx; */
 }
 
 .taffy {

@@ -7,7 +7,7 @@
  * @copyright Chen, Yi-Cyuan 2014-2017
  * @license MIT
  */
-/*jslint bitwise: true */
+
 export default function () {
     'use strict';
 
